@@ -7,6 +7,8 @@ from mpl_toolkits.mplot3d import Axes3D
 from seaborn import despine
 from sklearn.metrics import confusion_matrix
 
+import tensorflow as tf
+
 from .perceptron import cross_entropy_loss, sigmoid, step
 
 
@@ -529,3 +531,27 @@ def plot_confusion_matrix(y_true, y_pred, y_labels=None):
     cbar.ax.tick_params(labelsize=10)
     fig.tight_layout()
     return fig, ax
+
+
+def plot_keras_activations(activations):
+    """Plot keras activation functions.
+
+    Args:
+        activations (list): List of Keras
+            activation functions
+
+    Returns:
+        [matplotlib figure]
+        [matplotlib axis]
+    """
+    fig, axs = plt.subplots(1,len(activations),figsize=(3*len(activations),5),sharex=True,sharey=True,dpi=150)
+    x = tf.constant(tf.range(-3,3,0.1), dtype=tf.float32)
+    for i, activation in enumerate(activations):
+        axs[i].plot(x.numpy(), activation(x).numpy())
+        axs[i].set_title(activation.__name__)
+        axs[i].set_xlabel(r'$x$')
+        if i == 0:
+            axs[i].set_ylabel(r'$\phi(x)$')
+        despine(ax=axs[i])
+    fig.tight_layout()
+    return fig, axs
