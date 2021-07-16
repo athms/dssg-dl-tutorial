@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 from seaborn import despine
+from sklearn.metrics import confusion_matrix
 
 from .perceptron import cross_entropy_loss, sigmoid, step
 
@@ -500,3 +501,31 @@ def plot_XOR_decision_boundaries(p1, p2, p3, X, y1, y2, y3,
     fig.tight_layout(w_pad=4)
 
     return fig, axs
+
+
+def plot_confusion_matrix(y_true, y_pred, y_labels=None):
+    """Plot a simply confusion matrix
+
+    Args:
+        y_true ([array]): True data labels (int)
+        y_pred ([array]): Predicted data labels (int)
+        y_labels ([array], optional): Labels of individual classes.
+            Defaults to values of y_true.
+
+    Returns:
+        [matplotlib figure]
+        [matplotlib axis]
+    """
+    if y_labels is None:
+        y_labels = np.sort(np.unique(y_true))
+    # make figure
+    fig, ax = plt.subplots(dpi=150)
+    cm = ax.imshow(confusion_matrix(y_true.ravel(), y_pred, normalize='true'))
+    ax.set_xticks(np.arange(10)); ax.set_xticklabels(y_labels, rotation=90, fontsize=10);
+    ax.set_yticks(np.arange(10)); ax.set_yticklabels(y_labels, fontsize=10);
+    ax.set_title('Accuracy: {:.2f}\%'.format(np.mean(y_pred==y_true.ravel()) * 100), fontsize=10)
+    cbar = fig.colorbar(cm)
+    cbar.set_label('Frequency (%)', fontsize=10)
+    cbar.ax.tick_params(labelsize=10)
+    fig.tight_layout()
+    return fig, ax
