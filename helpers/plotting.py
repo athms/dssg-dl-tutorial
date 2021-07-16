@@ -523,7 +523,7 @@ def plot_confusion_matrix(y_true, y_pred, y_labels=None):
     cm = ax.imshow(confusion_matrix(y_true.ravel(), y_pred, normalize='true'))
     ax.set_xticks(np.arange(10)); ax.set_xticklabels(y_labels, rotation=90, fontsize=10);
     ax.set_yticks(np.arange(10)); ax.set_yticklabels(y_labels, fontsize=10);
-    ax.set_title('Accuracy: {:.2f}\%'.format(np.mean(y_pred==y_true.ravel()) * 100), fontsize=10)
+    ax.set_title('Accuracy: {:.2f}%'.format(np.mean(y_pred==y_true.ravel()) * 100), fontsize=10)
     cbar = fig.colorbar(cm)
     cbar.set_label('Frequency (%)', fontsize=10)
     cbar.ax.tick_params(labelsize=10)
