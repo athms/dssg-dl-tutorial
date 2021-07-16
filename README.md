@@ -2,8 +2,9 @@
 
 This repository contains materials for a quick introductory course on the basics of deep learning for the participants of the [data science for social good summer program](https://datascience.stanford.edu/programs/data-science-social-good-summer-program) of Stanford Data Science.
 
+Each topic is covered in a separate [Jupyter notebook](https://jupyter.org); each notebook contains a brief theoretical introduction to its topic as well as a practical exercise.
 
-## 1. Running the notebooks
+## Running the notebooks
 
 For a general introduction to the Jupyter environment, I recommend [this tutorial](https://www.dataquest.io/blog/jupyter-notebook-tutorial/).
 
